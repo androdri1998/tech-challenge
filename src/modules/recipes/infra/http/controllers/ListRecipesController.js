@@ -1,10 +1,18 @@
 const HTTPStatusCode = require('http-status-codes');
 
+const ListRecipesService = require('../../../services/ListRecipesService');
+const RecipePuppyRepository = require('../../recipePuppy/repositories/RecipePuppyRepository');
+
 class ListRecipesController {
   async index(req, res) {
-    res.status(HTTPStatusCode.StatusCodes.ACCEPTED).json({
-      message: 'hello world',
-    });
+    const { i: ingredients } = req.query;
+
+    const recipePuppyRepository = new RecipePuppyRepository();
+    const listRecipesService = new ListRecipesService(recipePuppyRepository);
+
+    const listRecipes = await listRecipesService.execute({ ingredients });
+
+    res.status(HTTPStatusCode.StatusCodes.OK).json(listRecipes);
   }
 }
 
