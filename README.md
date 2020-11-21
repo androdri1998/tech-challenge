@@ -24,7 +24,7 @@ Baseando-se nesse arquivo `.env.example` é necessário criar um arquivo na raiz
 configurações necessárias, no caso além das urls, será necessário uma api key para o funcionamento correto da listagem de gifs nas respostas da aplicação.  
   
 #### Segundo passo  
-Para construção da imagem da aplicação é necessário a contrução de uma imagem via docker com o seguinte comando:
+Para construção da imagem da aplicação é necessário a contrução de uma imagem via docker com o seguinte comando:  
 `docker build -t tech-challenge-image .`  
 **atenção** em alguns casos pode ser necessário rodar o comando com permissões `sudo` devido a falta de permissões.  
   
