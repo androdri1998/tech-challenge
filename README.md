@@ -14,7 +14,7 @@ Existe um arquivo de exemplo para configuração chamado de `.env.example` que c
 a aplicação funcionar normalmente, seu conteúdo atual é:
 ```
 # gifs config
-GIPHY_URL="http://api.giphy.com"
+GIPHY_URL="https://api.giphy.com"
 GIPHY_KEY="GIPHY_KEY"
 
 # recipes config
