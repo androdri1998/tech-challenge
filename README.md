@@ -8,7 +8,8 @@ O objetivo da aplicação é obter uma lista de receitas a que são compostas po
 - Projeto criado na GIPHY for Developers para uso de gifs da plataforma
   
 ## Quais configurações são necessárias?  
-### Primeiro passo
+### Utilizando docker  
+#### Primeiro passo  
 Existe um arquivo de exemplo para configuração chamado de `.env.example` que contém as váriáveis necessárias para  
 a aplicação funcionar normalmente, seu conteúdo atual é:
 ```
@@ -22,12 +23,12 @@ RECIPE_PUPPY_URL="http://www.recipepuppy.com/api"
 Baseando-se nesse arquivo `.env.example` é necessário criar um arquivo na raiz da aplicação chamado `.env` com as  
 configurações necessárias, no caso além das urls, será necessário uma api key para o funcionamento correto da listagem de gifs nas respostas da aplicação.  
   
-### Segundo passo  
+#### Segundo passo  
 Para construção da imagem da aplicação é necessário a contrução de uma imagem via docker com o seguinte comando:
 `docker build -t tech-challenge-image .`  
 **atenção** em alguns casos pode ser necessário rodar o comando com permissões `sudo` devido a falta de permissões.  
   
-### Terceiro passo
+#### Terceiro passo  
 Com a imagem construída é necessário inicializar e executar um novo container para execução da aplicação com o  
 seguinte comando:  
 `docker run --name tech-challenge-container -p 8080:8080 -d tech-challenge-image`  
@@ -35,14 +36,39 @@ seguinte comando:
   
 Ao seguir esses passos a aplicação já deverá ser capaz de receber requests na porta `8080`.  
   
-### Gerenciamento do container  
-#### Parar a execução do container  
+#### Gerenciamento do container  
+##### Parar a execução do container  
 Este comando é usado para interromper a execução do container:  
 `sudo docker stop tech-challenge-container`  
   
-#### Iniciar um container já criado  
+##### Iniciar um container já criado  
 Este comando é usado para inciar o container já criado:  
 `sudo docker start tech-challenge-container`  
+  
+### Sem utilizar docker  
+#### Primeiro passo  
+Existe um arquivo de exemplo para configuração chamado de `.env.example` que contém as váriáveis necessárias para  
+a aplicação funcionar normalmente, seu conteúdo atual é:
+```
+# gifs config
+GIPHY_URL="http://api.giphy.com"
+GIPHY_KEY="GIPHY_KEY"
+
+# recipes config
+RECIPE_PUPPY_URL="http://www.recipepuppy.com/api"
+```
+Baseando-se nesse arquivo `.env.example` é necessário criar um arquivo na raiz da aplicação chamado `.env` com as  
+configurações necessárias, no caso além das urls, será necessário uma api key para o funcionamento correto da listagem de gifs nas respostas da aplicação.  
+  
+#### Segundo passo  
+Instalar dependências com o comando:  
+`npm install`  
+  
+#### Terceiro passo  
+Executar a aplicação com o comando:  
+`npm run start`  
+  
+Ao seguir esses passos a aplicação já deverá ser capaz de receber requests na porta `8080`.  
   
 ### API  
 #### Rotas disponíveis  
@@ -67,4 +93,14 @@ O retorno da api será com status code `200` e conteúdo da seguinte forma:
     }
   ]
 }
-```
+```  
+  
+### Comandos disponíveis  
+#### `npm run start`  
+Utilizado para iniciar a aplicação sem observar novas alterações.  
+  
+#### `npm run dev`  
+Utilizado para iniciar a aplicação em modo de desenvolvimento observando alterações.  
+  
+#### `npm run test`  
+Utilizado para executar os testes unitários da aplicação.  
