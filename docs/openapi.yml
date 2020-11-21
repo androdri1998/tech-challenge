@@ -1,0 +1,74 @@
+swagger: '2.0'
+info:
+  description: 'Esta é uma breve documentação sobre a API de recipes.'
+  version: '1.0.0'
+  title: 'Recipes API'
+host: 'localhost:8080'
+tags:
+  - name: 'Recipe'
+    description: 'Gerenciamento de receitas de cozinha'
+schemes:
+  - 'http'
+paths:
+  /recipes:
+    get:
+      tags:
+        - 'Recipe'
+      summary: 'Listar receitas de cozinha'
+      description: 'Esta rota permite listar receitas de cozinha baseada em ingredientes indicados na request'
+      operationId: 'findRecipesByIngredients'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: 'i'
+          in: 'query'
+          description: 'Variável onde serão indicados os ingredientes que as receitas devem conter'
+          required: true
+          type: 'array'
+          items:
+            type: 'string'
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/Recipes'
+        '400':
+          description: 'Geralmente ocorrerá quando houver erros nos parâmetros da requisição'
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: 'Erro interno da aplicação'
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Recipe:
+    type: 'object'
+    properties:
+      title:
+        type: 'string'
+      ingredients:
+        type: 'array'
+        items:
+          type: 'string'
+      link:
+        type: 'string'
+      gif:
+        type: 'string'
+  Recipes:
+    type: 'object'
+    properties:
+      keywords:
+        type: 'array'
+        items:
+          type: 'string'
+      recipes:
+        type: 'array'
+        items:
+          $ref: '#/definitions/Recipe'
+  Error:
+    type: 'object'
+    properties:
+      status:
+        type: 'string'
+      error:
+        type: 'string'
