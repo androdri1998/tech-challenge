@@ -1,6 +1,7 @@
 class ListRecipesService {
-  constructor(recipeProvider) {
+  constructor(recipeProvider, gifProvider) {
     this.recipeProvider = recipeProvider;
+    this.gifProvider = gifProvider;
   }
 
   async execute({ ingredients }) {
@@ -8,20 +9,27 @@ class ListRecipesService {
       ingredients,
     });
 
-    const recipeSerialized = recipes.map(recipe => {
-      const arrIngredients = recipe.ingredients.split(',');
-      const ingredientsTrimed = arrIngredients.map(ingredient =>
-        ingredient.trim(),
-      );
-      const ingredientsSorted = ingredientsTrimed.sort();
+    const recipeSerialized = await Promise.all(
+      recipes.map(async recipe => {
+        const arrIngredients = recipe.ingredients.split(',');
+        const ingredientsTrimed = arrIngredients.map(ingredient =>
+          ingredient.trim(),
+        );
+        const ingredientsSorted = ingredientsTrimed.sort();
 
-      return {
-        title: recipe.title,
-        ingredients: ingredientsSorted,
-        link: recipe.href,
-        gif: recipe.thumbnail,
-      };
-    });
+        const gif = await this.gifProvider.findGiphyByRecipeTitle({
+          title: recipe.title,
+        });
+        const linkToGif = gif.images.preview_gif.url;
+
+        return {
+          title: recipe.title,
+          ingredients: ingredientsSorted,
+          link: recipe.href,
+          gif: linkToGif,
+        };
+      }),
+    );
 
     return {
       keywords: ingredients.sort(),

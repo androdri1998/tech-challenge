@@ -1,3 +1,3 @@
 module.exports = {
-  url: 'http://www.recipepuppy.com/api',
+  url: process.env.RECIPE_PUPPY_URL,
 };

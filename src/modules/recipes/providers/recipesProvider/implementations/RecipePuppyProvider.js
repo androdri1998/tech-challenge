@@ -1,4 +1,4 @@
-const recipeConfig = require('../../../../../config/recipes');
+const recipesConfig = require('../../../../../config/recipes');
 
 class RecipePuppyProvider {
   constructor(requestProvider) {
@@ -7,7 +7,7 @@ class RecipePuppyProvider {
 
   async findRecipesByIngredients({ ingredients = [] }) {
     const recipesResponse = await this.requestProvider.get({
-      url: recipeConfig.url,
+      url: recipesConfig.url,
       params: { i: ingredients.join(',') },
     });
 

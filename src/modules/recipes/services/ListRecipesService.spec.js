@@ -1,16 +1,22 @@
 const ListRecipesService = require('./ListRecipesService');
 const FakeRecipesProvider = require('../providers/recipesProvider/fakes/FakeRecipesProvider');
 const FakeRequestProvider = require('../../../shared/container/providers/RequestProvider/fakes/FakeRequestProvider');
+const FakeGifsProvider = require('../../../shared/container/providers/GifsProvider/fakes/FakeGifsProvider');
 
 let listRecipesService;
 let fakeRecipesProvider;
 let fakeRequestProvider;
+let fakeGifsProvider;
 
 describe('ListRecipesService', () => {
   beforeEach(() => {
     fakeRequestProvider = new FakeRequestProvider();
     fakeRecipesProvider = new FakeRecipesProvider(fakeRequestProvider);
-    listRecipesService = new ListRecipesService(fakeRecipesProvider);
+    fakeGifsProvider = new FakeGifsProvider(fakeRequestProvider);
+    listRecipesService = new ListRecipesService(
+      fakeRecipesProvider,
+      fakeGifsProvider,
+    );
   });
 
   it('should be able to return recipes', async () => {
@@ -18,18 +24,16 @@ describe('ListRecipesService', () => {
 
     const recipesReponseCheck = [
       {
-        title:
-          'Roasted Garlic Grilling Sauce \r\n\t\t\r\n\t\r\n\t\t\r\n\t\r\n\t\t\r\n\t\r\n\t\r\n\r\n',
-        link:
-          'http://www.kraftfoods.com/kf/recipes/roasted-garlic-grilling-sauce-56344.aspx',
+        title: 'Title recipe 1',
+        link: 'link recipe 1',
         ingredients: ['garlic', 'hot sauce', 'onions'],
-        gif: 'http://img.recipepuppy.com/634118.jpg',
+        gif: 'link to giphy 1',
       },
       {
-        title: 'Steamed Mussels I',
-        link: 'http://allrecipes.com/Recipe/Steamed-Mussels-I/Detail.aspx',
+        title: 'Title recipe 2',
+        link: 'link recipe 2',
         ingredients: ['garlic', 'mussels', 'onions'],
-        gif: 'http://img.recipepuppy.com/29318.jpg',
+        gif: 'link to giphy 2',
       },
     ];
 

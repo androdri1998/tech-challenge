@@ -1,4 +1,4 @@
-const recipeConfig = require('../../../../../config/recipes');
+const recipesConfig = require('../../../../../config/recipes');
 
 class FakeRecipesProvider {
   constructor(requestProvider) {
@@ -7,24 +7,22 @@ class FakeRecipesProvider {
 
   async findRecipesByIngredients({ ingredients = [] }) {
     await this.requestProvider.get({
-      url: recipeConfig.url,
+      url: recipesConfig.url,
       params: { i: ingredients.join(',') },
     });
 
     return [
       {
-        title:
-          'Roasted Garlic Grilling Sauce \r\n\t\t\r\n\t\r\n\t\t\r\n\t\r\n\t\t\r\n\t\r\n\t\r\n\r\n',
-        href:
-          'http://www.kraftfoods.com/kf/recipes/roasted-garlic-grilling-sauce-56344.aspx',
+        title: 'Title recipe 1',
+        href: 'link recipe 1',
         ingredients: 'garlic, onions, hot sauce',
-        thumbnail: 'http://img.recipepuppy.com/634118.jpg',
+        thumbnail: 'link thumbnail recipe 1',
       },
       {
-        title: 'Steamed Mussels I',
-        href: 'http://allrecipes.com/Recipe/Steamed-Mussels-I/Detail.aspx',
+        title: 'Title recipe 2',
+        href: 'link recipe 2',
         ingredients: 'garlic, mussels, onions',
-        thumbnail: 'http://img.recipepuppy.com/29318.jpg',
+        thumbnail: 'link thumbnail recipe 2',
       },
     ];
   }
