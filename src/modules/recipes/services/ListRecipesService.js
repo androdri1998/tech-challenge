@@ -1,10 +1,10 @@
 class ListRecipesService {
-  constructor(recipeRepository) {
-    this.recipeRepository = recipeRepository;
+  constructor(recipeProvider) {
+    this.recipeProvider = recipeProvider;
   }
 
   async execute({ ingredients }) {
-    const recipes = await this.recipeRepository.findRecipesByIngredients({
+    const recipes = await this.recipeProvider.findRecipesByIngredients({
       ingredients,
     });
 

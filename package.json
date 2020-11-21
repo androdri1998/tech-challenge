@@ -2,11 +2,9 @@
   "name": "tech-challenge",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/androdri1998/tech-challenge.git",
-  "author": "André Rodrigues <andre.rodrigues98@outlook.com>",
   "license": "MIT",
   "engines": {
-    "node": "12.16.1"
+    "node": "12.*"
   },
   "devDependencies": {
     "eslint": "7.14.0",
@@ -29,6 +27,9 @@
     "joi": "^17.3.0"
   },
   "scripts": {
+    "nodemon": "nodemon",
+    "start": "node src/shared/infra/http/server.js",
+    "dev": "nodemon src/shared/infra/http/server.js",
     "test": "jest"
   }
 }

@@ -1,5 +1,16 @@
-class FakeRecipeRepository {
-  findRecipesByIngredients({ ingredients = [] }) {
+const recipeConfig = require('../../../../../config/recipes');
+
+class FakeRecipesProvider {
+  constructor(requestProvider) {
+    this.requestProvider = requestProvider;
+  }
+
+  async findRecipesByIngredients({ ingredients = [] }) {
+    await this.requestProvider.get({
+      url: recipeConfig.url,
+      params: { i: ingredients.join(',') },
+    });
+
     return [
       {
         title:
@@ -19,4 +30,4 @@ class FakeRecipeRepository {
   }
 }
 
-module.exports = FakeRecipeRepository;
+module.exports = FakeRecipesProvider;

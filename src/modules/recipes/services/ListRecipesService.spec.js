@@ -1,13 +1,16 @@
 const ListRecipesService = require('./ListRecipesService');
-const FakeRecipeRepository = require('../repositories/fakes/FakeRecipeRepository');
+const FakeRecipesProvider = require('../providers/recipesProvider/fakes/FakeRecipesProvider');
+const FakeRequestProvider = require('../../../shared/container/providers/RequestProvider/fakes/FakeRequestProvider');
 
 let listRecipesService;
-let fakeRecipeRepository;
+let fakeRecipesProvider;
+let fakeRequestProvider;
 
 describe('ListRecipesService', () => {
   beforeEach(() => {
-    fakeRecipeRepository = new FakeRecipeRepository();
-    listRecipesService = new ListRecipesService(fakeRecipeRepository);
+    fakeRequestProvider = new FakeRequestProvider();
+    fakeRecipesProvider = new FakeRecipesProvider(fakeRequestProvider);
+    listRecipesService = new ListRecipesService(fakeRecipesProvider);
   });
 
   it('should be able to return recipes', async () => {
